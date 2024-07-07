@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Elements Demo</title>
+    <style>
+        #svg-container {
+            width: 800px;
+            height: 600px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Basic Elements Demo</h1>
+    <div id="svg-container"></div>
+    
+    <script src="../../../dist/bundle.js"></script>
+    <script>
+        const container = document.getElementById('svg-container');
+
+        if (container) {
+            const diagram = new myLibrary.Diagram({ container });
+
+            // Criando um DiagramElement (nesse caso, um retângulo)
+            const rectangle = new myLibrary.Rectangle('rect1', 50, 50, 200, 100, 'blue', 'black');
+            
+            const circle = new myLibrary.Circle('circle1',160,160,60,'red','black');
+
+            const diamond = new myLibrary.Diamond('Diamond1', 300,300,300,'orange','black');
+           
+
+            // Adicionando o DiagramElement ao diagrama
+            diagram.addElement(rectangle);
+            diagram.addElement(circle);
+            diagram.addElement(diamond);
+        }
+    </script>
+</body>
+</html>
