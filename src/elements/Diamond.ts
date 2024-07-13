@@ -6,7 +6,9 @@ export class Diamond extends DiagramElement {
     private borderColor: string;
 
     constructor(id: string, x: number, y: number, size: number, fillColor: string, borderColor: string) {
-        super(id, x, y, 'diamond');
+        let largura = size/2
+        
+        super(id, x, y,largura,largura, 'diamond');
         this.size = size;
         this.fillColor = fillColor;
         this.borderColor = borderColor;
@@ -25,6 +27,7 @@ export class Diamond extends DiagramElement {
         this.svgElement = diamond;
 
         this.enableDrag();
+        this.enableSelection();
 
         return diamond;
     }

@@ -1,13 +1,12 @@
 import { DiagramElement } from './DiagramElement';
 
 export class Rectangle extends DiagramElement {
-  width: number;
-  height: number;
+
   fillColor: string;
   borderColor: string;
 
   constructor(id: string, x: number, y: number, width: number, height: number, fillColor: string, borderColor: string) {
-    super(id, x, y, 'rectangle');
+    super(id, x, y,width,height, 'rectangle');
     this.width = width;
     this.height = height;
     this.fillColor = fillColor;
@@ -24,7 +23,10 @@ export class Rectangle extends DiagramElement {
     rect.setAttribute('stroke', this.borderColor);
 
     this.svgElement = rect;
+    
     this.enableDrag();
+
+    this.enableSelection();
 
     
 
