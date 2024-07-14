@@ -62,8 +62,10 @@ export abstract class DiagramElement {
       if (this.svgElement?.parentNode) {
         this.svgElement.parentNode.appendChild(this.svgElement);
       }
-      this.isSelected = !this.isSelected;
-      this.showEffectSelect();
+      if(!this.isSelected){
+        this.isSelected = !this.isSelected;
+        this.showEffectSelect();
+      }
     });
 
     this.svgElement?.addEventListener('mouseup', (event: MouseEvent) => {
