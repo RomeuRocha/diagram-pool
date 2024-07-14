@@ -34,10 +34,17 @@ export class Diagram {
 
   addElement(element: DiagramElement) {
 
+    element.setDiagram(this)
     this.elements.push(element);
 
     this.svg.appendChild(element.render());
 
+  }
+
+  clearSelection(): void{
+    this.elements.forEach((element) => {
+      element.deselect();
+    });
   }
 
   refresh() {
