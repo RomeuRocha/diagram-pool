@@ -80,6 +80,12 @@ export abstract class DiagramElement {
   //método para aplicar efeito de seleção no elemento
   showEffectSelect(): void {
     this.svgElement.style.opacity = this.isSelected ? "0.6" : "1.0";
+  // Quando o elemento for selecionado adiciona box shadown
+    if (this.isSelected) {
+      this.svgElement.setAttribute("filter", "url(#drop-shadow)")
+    } else {
+      this.svgElement.removeAttribute("filter")
+    }
   }
 
   select(): void {

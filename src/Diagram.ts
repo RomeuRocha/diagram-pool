@@ -27,6 +27,21 @@ export class Diagram {
     svg.setAttribute('width', '100%');
     svg.setAttribute('height', '100%');
     svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    
+
+    // Adiciona filtro para aplicação de sombra nos elementos
+    const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
+    filter.setAttribute('id', 'drop-shadow');
+    filter.innerHTML = `
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur" />
+      <feOffset in="blur" dx="2" dy="2" result="offsetBlur" />
+      <feMerge>
+        <feMergeNode in="offsetBlur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    `;
+  svg.appendChild(filter);
+
     return svg;
   }
 
