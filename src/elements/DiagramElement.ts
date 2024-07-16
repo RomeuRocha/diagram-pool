@@ -79,12 +79,16 @@ export abstract class DiagramElement {
 
   //método para aplicar efeito de seleção no elemento
   showEffectSelect(): void {
-    this.svgElement.style.opacity = this.isSelected ? "0.6" : "1.0";
-  // Quando o elemento for selecionado adiciona box shadown
     if (this.isSelected) {
-      this.svgElement.setAttribute("filter", "url(#drop-shadow)")
+      this.svgElement.style.opacity = "0.8";
+      this.svgElement.setAttribute("stroke", "rgb(0, 123, 255)");
+      this.svgElement.setAttribute("stroke-width", "1");
+      this.svgElement.setAttribute("stroke-dasharray","12 8");
     } else {
-      this.svgElement.removeAttribute("filter")
+      this.svgElement.style.opacity = "1.0";
+      this.svgElement.removeAttribute("stroke");
+      this.svgElement.removeAttribute("stroke-width");
+      
     }
   }
 
