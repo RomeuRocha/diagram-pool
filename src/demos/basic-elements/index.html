@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +11,23 @@
             height: 600px;
             border: 1px solid black;
         }
-        h1{
+
+        h1 {
             text-align: center;
+        }
+
+        #svg-container {
+           
+            background-image: radial-gradient(circle, #000 1px, transparent 1px);
+            background-size: 20px 20px;
         }
     </style>
 </head>
+
 <body>
     <h1>Basic Elements Demo</h1>
     <div id="svg-container"></div>
-    
+
     <script src="../../../dist/bundle.js"></script>
     <script>
         const container = document.getElementById('svg-container');
@@ -28,11 +37,11 @@
 
             // Criando um DiagramElement (nesse caso, um retângulo)
             const rectangle = new myLibrary.Rectangle('rect1', 50, 50, 200, 100, 'blue');
-            
-            const circle = new myLibrary.Circle('circle1',160,160,60,'red');
 
-            const diamond = new myLibrary.Diamond('Diamond1', 150,150,150,'orange');
-            
+            const circle = new myLibrary.Circle('circle1', 160, 160, 60, 'red');
+
+            const diamond = new myLibrary.Diamond('Diamond1', 150, 150, 150, 'orange');
+
             // Adicionando o DiagramElement ao diagrama
             diagram.addElement(rectangle);
             diagram.addElement(circle);
@@ -40,4 +49,5 @@
         }
     </script>
 </body>
+
 </html>

@@ -17,6 +17,7 @@ export class Diagram {
   constructor(config: DiagramConfig) {
     this.container = config.container;
     this.svg = this.createSvgElement();
+   
     this.container.appendChild(this.svg);
 
     this.initSelectionRectangle();
