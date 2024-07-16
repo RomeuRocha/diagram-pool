@@ -27,32 +27,52 @@ export class Diagram {
     svg.setAttribute('width', '100%');
     svg.setAttribute('height', '100%');
     svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    
-
-    // Adiciona filtro para aplicação de sombra nos elementos
-    const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
-    filter.setAttribute('id', 'drop-shadow');
-    filter.innerHTML = `
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur" />
-      <feOffset in="blur" dx="2" dy="2" result="offsetBlur" />
-      <feMerge>
-        <feMergeNode in="offsetBlur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    `;
+    // Adiciona filtro de sombra
+    const filter = this.createShadowFilter();
   svg.appendChild(filter);
 
     return svg;
   }
 
-
+  private createShadowFilter(): SVGFilterElement {
+    const filter = document.createElementNS("http://www.w3.org/2000/svg", "filter");
+    filter.setAttribute("id", "drop-shadow");
+  
+    const feGaussianBlur = document.createElementNS("http://www.w3.org/2000/svg", "feGaussianBlur");
+    feGaussianBlur.setAttribute("in", "SourceAlpha");
+    feGaussianBlur.setAttribute("stdDeviation", "2");
+    feGaussianBlur.setAttribute("result", "blur");
+    filter.appendChild(feGaussianBlur);
+  
+    const feOffset = document.createElementNS("http://www.w3.org/2000/svg", "feOffset");
+    feOffset.setAttribute("in", "blur");
+    feOffset.setAttribute("dx", "2");
+    feOffset.setAttribute("dy", "2");
+    feOffset.setAttribute("result", "offsetBlur");
+    filter.appendChild(feOffset);
+  
+    const feMerge = document.createElementNS("http://www.w3.org/2000/svg", "feMerge");
+    const feMergeNode1 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+    feMergeNode1.setAttribute("in", "offsetBlur");
+    feMerge.appendChild(feMergeNode1);
+  
+    const feMergeNode2 = document.createElementNS("http://www.w3.org/2000/svg", "feMergeNode");
+    feMergeNode2.setAttribute("in", "SourceGraphic");
+    feMerge.appendChild(feMergeNode2);
+  
+    filter.appendChild(feMerge);
+  
+    return filter;
+  }
 
   addElement(element: DiagramElement) {
 
     element.setDiagram(this)
     this.elements.push(element);
 
-    this.svg.appendChild(element.render());
+    const renderedElement = element.render();
+    renderedElement.setAttribute('filter', 'url(#drop-shadow)');
+    this.svg.appendChild(renderedElement);
 
   }
 
