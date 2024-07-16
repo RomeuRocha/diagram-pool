@@ -37,6 +37,8 @@ export abstract class DiagramElement {
   abstract render(): SVGElement;
 
   initialize(): void {
+    //Adiciona sombra a todos os elementos
+    this.svgElement.setAttribute('filter', 'url(#drop-shadow)');
     if (this.isDraggable) {
       this.svgElement?.addEventListener("mousedown", (event: MouseEvent) => {
         event.preventDefault();
