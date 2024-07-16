@@ -48,12 +48,23 @@ export abstract class DiagramElement {
   
         // Limpa a seleção quando o diagrama não for não nulo
         if (this.diagram != null) {
-          if (!event.shiftKey) {
-            this.diagram.clearSelection();
+          if (event.shiftKey) {
+            if(this.isSelected){
+              this.deselect()
+            }else{
+              this.select();
+
+            }
+          }else{
+            if(!this.isSelected){
+              this.diagram.clearSelection();
+              this.select();
+
+            }
           }
         }
   
-        this.select();
+        
   
         // Movimentação do elemento
         let lastX = event.clientX;
@@ -62,9 +73,12 @@ export abstract class DiagramElement {
         const onMouseMove = (moveEvent: MouseEvent) => {
           const deltaX = moveEvent.clientX - lastX;
           const deltaY = moveEvent.clientY - lastY;
-  
-          this.moveBy(deltaX, deltaY);
-          this.relayMouseMoveToSelectedElements(deltaX, deltaY);
+          
+          if(this.isSelected){
+            this.moveBy(deltaX, deltaY);
+            this.relayMouseMoveToSelectedElements(deltaX, deltaY);
+
+          }
   
           // Atualizar a posição inicial para o próximo movimento
           lastX = moveEvent.clientX;
