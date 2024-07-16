@@ -66,14 +66,9 @@ export class Diagram {
   }
 
   addElement(element: DiagramElement) {
-
     element.setDiagram(this)
     this.elements.push(element);
-
-    const renderedElement = element.render();
-    renderedElement.setAttribute('filter', 'url(#drop-shadow)');
-    this.svg.appendChild(renderedElement);
-
+    this.svg.appendChild(element.svgElement);
   }
 
   clearSelection(): void{
@@ -139,8 +134,7 @@ export class Diagram {
         this.svg.removeEventListener('mousemove', onMouseMove);
         this.svg.removeEventListener('mouseup', onMouseUp);
 
-        // Aqui você pode adicionar a lógica para verificar quais elementos estão dentro do retângulo de seleção
-
+        //lógica para verificar quais elementos estão dentro do retângulo de seleção
         if (this.selectionRect) {
           const selectionBox = this.selectionRect.getBBox();
 

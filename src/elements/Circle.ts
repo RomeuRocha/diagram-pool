@@ -6,12 +6,14 @@ export class Circle extends DiagramElement {
   borderColor: string;
 
   constructor(id: string, x: number, y: number, radius: number, fillColor: string, borderColor: string) {
-    let largura = radius/2
+    let largura = radius / 2
 
-    super(id, x, y,largura,largura, 'circle');
+    super(id, x, y, largura, largura, 'circle');
     this.radius = radius;
     this.fillColor = fillColor;
     this.borderColor = borderColor;
+    this.svgElement = this.render();
+    this.initialize()
   }
 
   render(): SVGElement {
@@ -22,9 +24,6 @@ export class Circle extends DiagramElement {
     circle.setAttribute('fill', this.fillColor);
     circle.setAttribute('stroke', this.borderColor);
 
-    this.svgElement = circle;
-    this.enableDrag();
-    this.enableSelection();
 
     return circle;
   }
