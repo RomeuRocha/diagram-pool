@@ -52,7 +52,7 @@ export class Diagram {
     element.setDiagram(this)
     this.elements.push(element);
 
-    this.svg.appendChild(element.render());
+    this.svg.appendChild(element.svgElement);
 
   }
 
@@ -120,8 +120,7 @@ export class Diagram {
         this.svg.removeEventListener('mousemove', onMouseMove);
         this.svg.removeEventListener('mouseup', onMouseUp);
 
-        // Aqui você pode adicionar a lógica para verificar quais elementos estão dentro do retângulo de seleção
-
+        //lógica para verificar quais elementos estão dentro do retângulo de seleção
         if (this.selectionRect) {
           const selectionBox = this.selectionRect.getBBox();
 

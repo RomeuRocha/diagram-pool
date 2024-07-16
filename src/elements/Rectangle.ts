@@ -11,6 +11,11 @@ export class Rectangle extends DiagramElement {
     this.height = height;
     this.fillColor = fillColor;
     this.borderColor = borderColor;
+
+    this.svgElement = this.render();
+
+    this.initialize()
+
   }
 
   render(): SVGElement {
@@ -21,15 +26,6 @@ export class Rectangle extends DiagramElement {
     rect.setAttribute('height', this.height.toString());
     rect.setAttribute('fill', this.fillColor);
     rect.setAttribute('stroke', this.borderColor);
-
-    this.svgElement = rect;
-    
-    this.enableDrag();
-
-    this.enableSelection();
-
-    
-
     return rect;
   }
 
