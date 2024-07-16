@@ -5,10 +5,10 @@ export class Diamond extends DiagramElement {
     private fillColor: string;
     private borderColor: string;
 
-    constructor(id: string, x: number, y: number, size: number, fillColor: string, borderColor: string) {
+    constructor( x: number, y: number, size: number, fillColor: string, borderColor: string) {
         let largura = size / 2
 
-        super(id, x, y, largura, largura, 'diamond');
+        super( x, y, largura, largura, 'diamond');
         this.size = size;
         this.fillColor = fillColor;
         this.borderColor = borderColor;

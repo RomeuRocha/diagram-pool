@@ -1,4 +1,6 @@
+import { randomUUID } from "crypto";
 import { Diagram } from "../Diagram";
+import { UUID } from "../util/UUID";
 
 export abstract class DiagramElement {
   id: string;
@@ -19,14 +21,13 @@ export abstract class DiagramElement {
   protected isSelectable: boolean = true;
 
   constructor(
-    id: string,
     x: number,
     y: number,
     width: number,
     height: number,
     type: string
   ) {
-    this.id = id;
+    this.id = UUID.GenerateGUID();
     this.x = x;
     this.y = y;
     this.width = width;

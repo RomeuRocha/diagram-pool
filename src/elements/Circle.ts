@@ -5,10 +5,10 @@ export class Circle extends DiagramElement {
   fillColor: string;
   borderColor: string;
 
-  constructor(id: string, x: number, y: number, radius: number, fillColor: string, borderColor: string) {
+  constructor( x: number, y: number, radius: number, fillColor: string, borderColor: string) {
     let largura = radius / 2
 
-    super(id, x, y, largura, largura, 'circle');
+    super( x, y, largura, largura, 'circle');
     this.radius = radius;
     this.fillColor = fillColor;
     this.borderColor = borderColor;

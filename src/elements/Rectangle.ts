@@ -5,8 +5,8 @@ export class Rectangle extends DiagramElement {
   fillColor: string;
   borderColor: string;
 
-  constructor(id: string, x: number, y: number, width: number, height: number, fillColor: string, borderColor: string) {
-    super(id, x, y,width,height, 'rectangle');
+  constructor(x: number, y: number, width: number, height: number, fillColor: string, borderColor: string) {
+    super(x, y,width,height, 'rectangle');
     this.width = width;
     this.height = height;
     this.fillColor = fillColor;
