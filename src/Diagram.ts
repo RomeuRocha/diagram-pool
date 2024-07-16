@@ -87,8 +87,7 @@ export class Diagram {
 
       this.selectionRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
       this.selectionRect.setAttribute('fill', 'rgba(0, 0, 0, 0.2)');
-      this.selectionRect.setAttribute('stroke', 'black');
-      this.selectionRect.setAttribute('stroke-width', '1');
+      this.selectionRect.setAttribute('rx', '4'); // adiciona um raio de 10 pixels para as quinas do retângulo
       this.svg.appendChild(this.selectionRect);
 
       const startX = event.offsetX;
