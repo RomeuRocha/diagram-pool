@@ -5,20 +5,20 @@ export class Diamond extends DiagramElement {
     private fillColor: string;
     private borderColor: string;
 
-    constructor( x: number, y: number, size: number, fillColor: string, borderColor: string) {
-        let largura = size / 2
+    constructor(x: number, y: number, size: number, fillColor: string, borderColor: string) {
+        let largura = size / 2;
 
-        super( x, y, largura, largura, 'diamond');
+        super(x, y, largura, largura, 'diamond');
         this.size = size;
         this.fillColor = fillColor;
         this.borderColor = borderColor;
         this.svgElement = this.render();
-        this.initialize()
+        this.initialize();
     }
 
-    render(): SVGElement {
+    render(): SVGGraphicsElement {
         const halfSize = this.size / 2;
-        const diamond = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        const diamond = document.createElementNS('http://www.w3.org/2000/svg', 'polygon') as SVGGraphicsElement;
         diamond.setAttribute('points', `${this.x},${this.y - halfSize} ${this.x + halfSize},${this.y} ${this.x},${this.y + halfSize} ${this.x - halfSize},${this.y}`);
         diamond.setAttribute('fill', this.fillColor);
         diamond.setAttribute('stroke', this.borderColor);
@@ -36,5 +36,4 @@ export class Diamond extends DiagramElement {
             this.svgElement.setAttribute('points', points);
         }
     }
-
 }
