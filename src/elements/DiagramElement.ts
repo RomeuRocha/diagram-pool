@@ -1,5 +1,6 @@
 import { Diagram } from "../Diagram";
 import { UUID } from "../util/UUID";
+import { SelectionElement } from "./SelectionElement"; // Certifique-se de importar corretamente
 
 export abstract class DiagramElement {
   id: string;
@@ -14,7 +15,7 @@ export abstract class DiagramElement {
   protected dragStartY: number = 0;
   public svgElement!: SVGGraphicsElement; // Assertion non-null
   protected diagram!: Diagram; // Assertion non-null
-  protected selectionRect: SVGRectElement | null = null; // Retângulo de seleção
+  protected selectionElement?: SelectionElement; // Instância de SelectionElement
 
   public isSelected: boolean = false;
   protected isSelectable: boolean = true;
@@ -102,10 +103,15 @@ export abstract class DiagramElement {
 
     links.map(link => {
       if (link.source == this || link.target == this)
-        link.updatePosition()
-    })
+        link.updatePosition();
+    });
 
     this.updatePosition();
+
+    // Atualiza a posição do retângulo de seleção, se estiver selecionado
+    if (this.isSelected && this.selectionElement) {
+      this.selectionElement.move(deltaX, deltaY);
+    }
   }
 
   relayMouseMoveToSelectedElements(deltaX: number, deltaY: number): void {
@@ -116,7 +122,6 @@ export abstract class DiagramElement {
         element.moveBy(deltaX, deltaY);
       }
     })
-
   }
 
   // Método para aplicar efeito de seleção no elemento
@@ -124,43 +129,21 @@ export abstract class DiagramElement {
     // Quando o elemento for selecionado, adiciona o retângulo de seleção
     if (this.isSelected) {
       this.svgElement.style.opacity = "0.8";
-      this.svgElement.setAttribute("stroke", "rgb(0, 123, 255)");
-      this.svgElement.setAttribute("stroke-width", "1");
-      this.svgElement.setAttribute("stroke-dasharray", "12 8");
-
       // Cria o retângulo de seleção se ainda não existir
-      if (!this.selectionRect) {
-        this.selectionRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        this.updateSelectionRect();
-        this.svgElement.parentNode?.insertBefore(this.selectionRect, this.svgElement.nextSibling);
+      if (!this.selectionElement) {
+        this.selectionElement = new SelectionElement();
+        this.selectionElement.update(this.x, this.y, this.width, this.height, this.type);
+        this.selectionElement.attach(this.svgElement.parentNode as SVGElement);
       } else {
-        this.updateSelectionRect();
+        this.selectionElement.update(this.x, this.y, this.width, this.height, this.type);
       }
     } else {
       this.svgElement.style.opacity = "1.0";
-      this.svgElement.removeAttribute("stroke");
-      this.svgElement.removeAttribute("stroke-width");
-
       // Remove o retângulo de seleção se existir
-      if (this.selectionRect && this.selectionRect.parentNode) {
-        this.selectionRect.parentNode.removeChild(this.selectionRect);
-        this.selectionRect = null;
+      if (this.selectionElement) {
+        this.selectionElement.remove();
+        this.selectionElement = undefined;
       }
-    }
-  }
-
-  // Atualiza a posição e tamanho do retângulo de seleção
-  protected updateSelectionRect(): void {
-    if (this.selectionRect) {
-      let bbox = this.svgElement.getBBox();
-      this.selectionRect.setAttribute('x', `${bbox.x}`);
-      this.selectionRect.setAttribute('y', `${bbox.y}`);
-      this.selectionRect.setAttribute('width', `${bbox.width}`);
-      this.selectionRect.setAttribute('height', `${bbox.height}`);
-      this.selectionRect.setAttribute('fill', 'none');
-      this.selectionRect.setAttribute('stroke', 'blue'); // Cor da borda do retângulo de seleção
-      this.selectionRect.setAttribute('stroke-width', '2');
-      this.selectionRect.setAttribute('stroke-dasharray', '5');
     }
   }
 
@@ -191,7 +174,6 @@ export abstract class DiagramElement {
 
   getCenterCoordinates(): { x: number; y: number } {
     // Obtém as coordenadas do bounding box
-
     return {
       x: this.x + this.width / 2,
       y: this.y + this.height / 2,
