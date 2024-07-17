@@ -6,20 +6,18 @@ export class Rectangle extends DiagramElement {
   borderColor: string;
 
   constructor(x: number, y: number, width: number, height: number, fillColor: string, borderColor: string) {
-    super(x, y,width,height, 'rectangle');
+    super(x, y, width, height, 'rectangle');
     this.width = width;
     this.height = height;
     this.fillColor = fillColor;
     this.borderColor = borderColor;
 
     this.svgElement = this.render();
-
-    this.initialize()
-
+    this.initialize();
   }
 
-  render(): SVGElement {
-    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  render(): SVGGraphicsElement {
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect') as SVGGraphicsElement;
     rect.setAttribute('x', this.x.toString());
     rect.setAttribute('y', this.y.toString());
     rect.setAttribute('width', this.width.toString());
@@ -33,6 +31,4 @@ export class Rectangle extends DiagramElement {
     this.svgElement.setAttribute('x', `${this.x}`);
     this.svgElement.setAttribute('y', `${this.y}`);
   }
-
- 
 }

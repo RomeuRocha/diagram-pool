@@ -5,20 +5,18 @@ export class UMLElement extends DiagramElement {
   attributes: string[];
   methods: string[];
 
-
- 
   constructor(x: number, y: number, className: string, attributes: string[], methods: string[]) {
-    super(x, y,200,500, 'uml');
+    super(x, y, 200, 500, 'uml');
     this.className = className;
     this.attributes = attributes;
     this.methods = methods;
 
-    this.svgElement = this.render();
-    this.initialize()
+    this.svgElement = this.render() as SVGGraphicsElement;
+    this.initialize();
   }
 
-  render(): SVGElement {
-    const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  render(): SVGGraphicsElement {
+    const group = document.createElementNS('http://www.w3.org/2000/svg', 'g') as SVGGraphicsElement;
 
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     rect.setAttribute('x', `${this.x}`);
@@ -89,6 +87,4 @@ export class UMLElement extends DiagramElement {
       }
     }
   }
-
-
 }

@@ -6,19 +6,18 @@ export class Diamond extends DiagramElement {
     private borderColor: string;
 
     constructor( x: number, y: number, size: number, fillColor: string, borderColor: string) {
-        
-
+    
         super( x, y, size, size, 'diamond');
         this.size = size;
         this.fillColor = fillColor;
         this.borderColor = borderColor;
         this.svgElement = this.render();
-        this.initialize()
+        this.initialize();
     }
 
-    render(): SVGElement {
+    render(): SVGGraphicsElement {
         const halfSize = this.size / 2;
-        const diamond = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        const diamond = document.createElementNS('http://www.w3.org/2000/svg', 'polygon') as SVGGraphicsElement;
         diamond.setAttribute('points', `${this.x},${this.y - halfSize} ${this.x + halfSize},${this.y} ${this.x},${this.y + halfSize} ${this.x - halfSize},${this.y}`);
         diamond.setAttribute('fill', this.fillColor);
         diamond.setAttribute('stroke', this.borderColor);
