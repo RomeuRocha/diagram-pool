@@ -94,30 +94,30 @@ export abstract class DiagramElement {
     }
   }
 
-moveBy(deltaX: number, deltaY: number): void {
-  this.x += deltaX;
-  this.y += deltaY;
+  moveBy(deltaX: number, deltaY: number): void {
+    this.x += deltaX;
+    this.y += deltaY;
 
-  let links = this.diagram.getLinks();
+    let links = this.diagram.getLinks();
 
-  links.map(link=>{
-    if(link.source == this || link.target == this)
-    link.updatePosition()
-  })
+    links.map(link => {
+      if (link.source == this || link.target == this)
+        link.updatePosition()
+    })
 
-  this.updatePosition();
-}
-
-relayMouseMoveToSelectedElements(deltaX: number, deltaY: number): void {
-  const selectedElements = this.diagram.getSelectedElements();
-
-  selectedElements.forEach(element => {
-    if (element !== this) {
-      element.moveBy(deltaX, deltaY);
-    }
+    this.updatePosition();
   }
 
-}
+  relayMouseMoveToSelectedElements(deltaX: number, deltaY: number): void {
+    const selectedElements = this.diagram.getSelectedElements();
+
+    selectedElements.forEach(element => {
+      if (element !== this) {
+        element.moveBy(deltaX, deltaY);
+      }
+    })
+
+  }
 
   // Método para aplicar efeito de seleção no elemento
   showEffectSelect(): void {
@@ -190,7 +190,7 @@ relayMouseMoveToSelectedElements(deltaX: number, deltaY: number): void {
   }
 
   getCenterCoordinates(): { x: number; y: number } {
-     // Obtém as coordenadas do bounding box
+    // Obtém as coordenadas do bounding box
 
     return {
       x: this.x + this.width / 2,
