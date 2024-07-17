@@ -1,4 +1,5 @@
 import { DiagramElement } from './elements/DiagramElement';
+import { LinkBase } from './elements/LinkBase';
 
 export interface DiagramConfig {
   container: HTMLElement;
@@ -7,6 +8,8 @@ export interface DiagramConfig {
 export class Diagram {
   container: HTMLElement;
   elements: DiagramElement[] = [];
+
+  links:LinkBase[] = []
 
 
   private svg: SVGSVGElement;
@@ -70,6 +73,16 @@ export class Diagram {
     element.setDiagram(this)
     this.elements.push(element);
     this.svg.appendChild(element.svgElement);
+  }
+
+  addLink(link: LinkBase){
+
+    this.links.push(link)
+    this.svg.appendChild(link.svgElement);
+  }
+
+  getLinks():LinkBase[]{
+    return this.links;
   }
 
   clearSelection(): void{

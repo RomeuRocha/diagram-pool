@@ -6,7 +6,7 @@ export class Circle extends DiagramElement {
   borderColor: string;
 
   constructor( x: number, y: number, radius: number, fillColor: string, borderColor: string) {
-    let largura = radius / 2
+    let largura = radius * 2
 
     super( x, y, largura, largura, 'circle');
     this.radius = radius;
@@ -32,4 +32,11 @@ export class Circle extends DiagramElement {
     this.svgElement.setAttribute('cx', `${this.x}`);
     this.svgElement.setAttribute('cy', `${this.y}`);
   }
+
+  getCenterCoordinates(): { x: number; y: number } {
+   return {
+     x: this.x,
+     y: this.y,
+   };
+ }
 }

@@ -1,6 +1,7 @@
 import { randomUUID } from "crypto";
 import { Diagram } from "../Diagram";
 import { UUID } from "../util/UUID";
+import { LinkBase } from "./LinkBase";
 
 export abstract class DiagramElement {
   id: string;
@@ -103,6 +104,14 @@ export abstract class DiagramElement {
 moveBy(deltaX: number, deltaY: number): void {
   this.x += deltaX;
   this.y += deltaY;
+
+  let links = this.diagram.getLinks();
+
+  links.map(link=>{
+    if(link.source == this || link.target == this)
+    link.updatePosition()
+  })
+
   this.updatePosition();
 }
 
@@ -159,5 +168,14 @@ relayMouseMoveToSelectedElements(deltaX: number, deltaY: number): void {
 
   setDiagram(diagram: Diagram): void {
     this.diagram = diagram;
+  }
+
+  getCenterCoordinates(): { x: number; y: number } {
+     // Obtém as coordenadas do bounding box
+
+    return {
+      x: this.x + this.width / 2,
+      y: this.y + this.height / 2,
+    };
   }
 }

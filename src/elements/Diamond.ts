@@ -6,9 +6,9 @@ export class Diamond extends DiagramElement {
     private borderColor: string;
 
     constructor( x: number, y: number, size: number, fillColor: string, borderColor: string) {
-        let largura = size / 2
+        
 
-        super( x, y, largura, largura, 'diamond');
+        super( x, y, size, size, 'diamond');
         this.size = size;
         this.fillColor = fillColor;
         this.borderColor = borderColor;
@@ -36,5 +36,12 @@ export class Diamond extends DiagramElement {
             this.svgElement.setAttribute('points', points);
         }
     }
+
+    getCenterCoordinates(): { x: number; y: number } {
+        return {
+          x: this.x,
+          y: this.y,
+        };
+      }
 
 }

@@ -38,17 +38,29 @@
             // Criando um DiagramElement (nesse caso, um retângulo)
             const rectangle = new myLibrary.Rectangle(50, 50, 200, 100, 'blue');
 
-            const circle = new myLibrary.Circle(160, 160, 60, 'red');
+            const rectangle2 = new myLibrary.Rectangle(300, 500, 200, 100, 'red');
+
+            const circle = new myLibrary.Circle(0, 0, 60, 'red');
 
             const diamond = new myLibrary.Diamond(150, 150, 150, 'orange');
            
-            const umlElement = new myLibrary.UMLElement(50, 50, 'Person', ['+ name: String', '+ age: int'], ['+ getName(): String', '+ getAge(): int']);
-            diagram.addElement(umlElement);
+            //const umlElement = new myLibrary.UMLElement(50, 50, 'Person', ['+ name: String', '+ age: int'], ['+ getName(): String', '+ getAge(): int']);
+            //diagram.addElement(umlElement);
+
+            const link2 = new myLibrary.LinkBase(rectangle, rectangle2);
+
+            const link = new myLibrary.LinkBase(circle, diamond);
 
             // Adicionando o DiagramElement ao diagrama
             diagram.addElement(rectangle);
             diagram.addElement(circle);
             diagram.addElement(diamond);
+            diagram.addElement(rectangle2)
+
+            diagram.addLink(link);
+            diagram.addLink(link2);
+
+            container.diagram = diagram;
         }
     </script>
 </body>
