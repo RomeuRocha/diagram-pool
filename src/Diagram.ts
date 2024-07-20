@@ -1,5 +1,5 @@
 import { DiagramElement } from './elements/DiagramElement';
-import { LinkBase } from './elements/LinkBase';
+import { LinkBase } from './links/LinkBase';
 
 export interface DiagramConfig {
   container: HTMLElement;

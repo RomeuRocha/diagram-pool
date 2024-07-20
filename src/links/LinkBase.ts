@@ -1,4 +1,4 @@
-import { DiagramElement } from './DiagramElement';
+import { DiagramElement } from '../elements/DiagramElement';
 
 export class LinkBase {
   source: DiagramElement;

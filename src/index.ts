@@ -4,5 +4,6 @@ export * from './elements/Circle';
 export * from './elements/Diamond'
 export * from './elements/UMLElement'
 export * from './util/UUID'
-export * from './elements/LinkBase'
+export * from './links/LinkBase'
+export * from './links/BezierLink'
 export * from './Diagram';
