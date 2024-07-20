@@ -179,4 +179,6 @@ export abstract class DiagramElement {
       y: this.y + this.height / 2,
     };
   }
+
+  
 }

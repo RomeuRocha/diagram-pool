@@ -33,4 +33,6 @@ export class LinkBase {
       this.svgElement.setAttribute('y2', `${this.target.getCenterCoordinates().y}`);
     }
   }
+
+  
 }

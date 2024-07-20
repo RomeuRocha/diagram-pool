@@ -40,7 +40,7 @@
 
             const rectangle2 = new myLibrary.Rectangle(300, 500, 200, 100, 'red');
 
-            const circle = new myLibrary.Circle(0, 0, 60, 'red');
+            const circle = new myLibrary.Circle(400, 400, 60, 'red');
 
             const diamond = new myLibrary.Diamond(150, 150, 150, 'orange');
            
@@ -49,7 +49,8 @@
 
             const link2 = new myLibrary.BezierLink(rectangle, rectangle2);
             
-            const link = new myLibrary.LinkBase(circle, diamond);
+            //const link = new myLibrary.LinkBase(circle, diamond);
+            const link = new myLibrary.BezierLink(circle, diamond);
 
             // Adicionando o DiagramElement ao diagrama
             diagram.addElement(rectangle);

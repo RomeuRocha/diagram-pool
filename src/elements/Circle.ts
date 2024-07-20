@@ -37,4 +37,20 @@ export class Circle extends DiagramElement {
       y: this.y,
     };
   }
+
+  getCircleIntersection( targetX: number, targetY: number) {
+    const cx = this.x;
+    const cy = this.y;
+    const radius = this.radius;
+  
+    const dx = targetX - cx;
+    const dy = targetY - cy;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+  
+    const x = cx + (dx / distance) * radius;
+    const y = cy + (dy / distance) * radius;
+  
+    return { x, y };
+  }
+  
 }

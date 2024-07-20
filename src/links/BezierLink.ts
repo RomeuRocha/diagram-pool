@@ -1,6 +1,8 @@
 import { Rectangle } from '../elements/Rectangle';
 import { DiagramElement } from '../elements/DiagramElement';
 import { LinkBase } from './LinkBase';
+import { Circle } from '../elements/Circle';
+import { Diamond } from '../elements/Diamond';
 
 export class BezierLink extends LinkBase {
   constructor(source: DiagramElement, target: DiagramElement) {
@@ -20,11 +22,16 @@ export class BezierLink extends LinkBase {
   }
 
   getIntersectionCoordinates(fromElement: DiagramElement, toElement: DiagramElement) {
-    const targetX = toElement.x + toElement.width / 2;
-    const targetY = toElement.y + toElement.height / 2;
+
+    const targetX = toElement.getCenterCoordinates().x;
+    const targetY = toElement.getCenterCoordinates().y;
 
     if (fromElement instanceof Rectangle) {
       return fromElement.getRectangleIntersection(targetX, targetY);
+    } else if (fromElement instanceof Circle) {
+      return fromElement.getCircleIntersection( targetX, targetY);
+    } else if (fromElement instanceof Diamond) {
+      return fromElement.getDiamondIntersection( targetX, targetY);
     } else {
       // Fallback: use center coordinates if shape is unknown
       return { x: fromElement.x + fromElement.width / 2, y: fromElement.y + fromElement.height / 2 };

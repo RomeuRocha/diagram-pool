@@ -5,9 +5,9 @@ export class Diamond extends DiagramElement {
     private fillColor: string;
     private borderColor: string;
 
-    constructor( x: number, y: number, size: number, fillColor: string, borderColor: string) {
-    
-        super( x, y, size, size, 'diamond');
+    constructor(x: number, y: number, size: number, fillColor: string, borderColor: string) {
+
+        super(x, y, size, size, 'diamond');
         this.size = size;
         this.fillColor = fillColor;
         this.borderColor = borderColor;
@@ -38,9 +38,24 @@ export class Diamond extends DiagramElement {
 
     getCenterCoordinates(): { x: number; y: number } {
         return {
-          x: this.x,
-          y: this.y,
+            x: this.x,
+            y: this.y,
         };
-      }
+    }
+
+    getDiamondIntersection(targetX: number, targetY: number) {
+        const centerX = this.x;
+        const centerY = this.y;
+    
+        return { x: centerX  , y: centerY };
+    }
+    
+    
+    
+    
+
 
 }
+
+
+
