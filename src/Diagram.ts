@@ -175,11 +175,18 @@ export class Diagram {
   private checkIfElementIsSelected(element: DiagramElement, selectionBox: DOMRect): boolean {
     
 
-    return (
+    /*return (
       element.x >= selectionBox.x &&
       element.y >= selectionBox.y &&
       (element.x + element.width) <= (selectionBox.x + selectionBox.width) &&
       (element.y + element.height) <= (selectionBox.y + selectionBox.height)
+    );*/
+
+    return (
+      element.getCenterCoordinates().x >= selectionBox.x &&
+      element.getCenterCoordinates().y >= selectionBox.y &&
+      (element.getCenterCoordinates().x) <= (selectionBox.x + selectionBox.width) &&
+      (element.getCenterCoordinates().y) <= (selectionBox.y + selectionBox.height)
     );
   }
   
