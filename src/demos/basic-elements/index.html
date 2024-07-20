@@ -47,9 +47,9 @@
             //const umlElement = new myLibrary.UMLElement(50, 50, 'Person', ['+ name: String', '+ age: int'], ['+ getName(): String', '+ getAge(): int']);
             //diagram.addElement(umlElement);
 
-            const link2 = new myLibrary.LinkBase(rectangle, rectangle2);
-
-            const link = new myLibrary.BezierLink(circle, diamond);
+            const link2 = new myLibrary.BezierLink(rectangle, rectangle2);
+            
+            const link = new myLibrary.LinkBase(circle, diamond);
 
             // Adicionando o DiagramElement ao diagrama
             diagram.addElement(rectangle);

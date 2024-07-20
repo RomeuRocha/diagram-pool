@@ -5,10 +5,10 @@ export class Circle extends DiagramElement {
   fillColor: string;
   borderColor: string;
 
-  constructor( x: number, y: number, radius: number, fillColor: string, borderColor: string) {
+  constructor(x: number, y: number, radius: number, fillColor: string, borderColor: string) {
     let largura = radius * 2
 
-    super( x, y, largura, largura, 'circle');
+    super(x, y, largura, largura, 'circle');
     this.radius = radius;
     this.fillColor = fillColor;
     this.borderColor = borderColor;
@@ -32,9 +32,9 @@ export class Circle extends DiagramElement {
   }
 
   getCenterCoordinates(): { x: number; y: number } {
-   return {
-     x: this.x,
-     y: this.y,
-   };
- }
+    return {
+      x: this.x,
+      y: this.y,
+    };
+  }
 }

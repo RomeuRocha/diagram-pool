@@ -31,4 +31,34 @@ export class Rectangle extends DiagramElement {
     this.svgElement.setAttribute('x', `${this.x}`);
     this.svgElement.setAttribute('y', `${this.y}`);
   }
+
+  getRectangleIntersection(targetX: number, targetY: number) {
+    const centerX = this.x + this.width / 2;
+    const centerY = this.y + this.height / 2;
+
+    const dx = targetX - centerX;
+    const dy = targetY - centerY;
+
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+
+    let intersectX, intersectY;
+
+    if (absDx > absDy) {
+      // Intersects with left or right edge
+      intersectX = dx > 0 ? this.x + this.width : this.x;
+      intersectY = centerY + dy * (this.width / 2) / absDx;
+    } else {
+      // Intersects with top or bottom edge
+      intersectY = dy > 0 ? this.y + this.height : this.y;
+      intersectX = centerX + dx * (this.height / 2) / absDy;
+    }
+
+    // Clamp the intersection point to the edges of the rectangle
+    intersectX = Math.min(Math.max(intersectX, this.x), this.x + this.width);
+    intersectY = Math.min(Math.max(intersectY, this.y), this.y + this.height);
+
+    return { x: intersectX, y: intersectY };
+  }
+  
 }
