@@ -21,7 +21,7 @@ export class SelectionElement {
     }
   
     update(x: number, y: number, width: number, height: number, type: string): void {
-      console.log(type);
+    
       
       if (this.rectElement) {
         if (type == 'circle' || type == 'diamond' ) {

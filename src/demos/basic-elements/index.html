@@ -36,30 +36,35 @@
             const diagram = new myLibrary.Diagram({ container });
 
             // Criando um DiagramElement (nesse caso, um retângulo)
-            const rectangle = new myLibrary.Rectangle(50, 50, 200, 100, 'blue');
+            const rectangle = new myLibrary.Rectangle(350, 40, 200, 100, 'blue');
 
-            const rectangle2 = new myLibrary.Rectangle(300, 500, 200, 100, 'red');
+            const rectangle2 = new myLibrary.Rectangle(350, 200, 200, 100, 'gray');
 
-            const circle = new myLibrary.Circle(400, 400, 60, 'red');
+            const circle = new myLibrary.Circle(450, 570, 30, 'black');
 
-            const diamond = new myLibrary.Diamond(150, 150, 150, 'orange');
-           
-            //const umlElement = new myLibrary.UMLElement(50, 50, 'Person', ['+ name: String', '+ age: int'], ['+ getName(): String', '+ getAge(): int']);
-            //diagram.addElement(umlElement);
+           const diamond = new myLibrary.Diamond(450, 420, 150, 'orange');
 
-            const link2 = new myLibrary.BezierLink(rectangle, rectangle2);
+           const rectangle3 = new myLibrary.Rectangle(702, 375, 200, 100, 'green');
+
+
             
-            //const link = new myLibrary.LinkBase(circle, diamond);
-            const link = new myLibrary.BezierLink(circle, diamond);
+            const link3 = new myLibrary.ArrowLink( rectangle,rectangle2);
+            const link4 = new myLibrary.ArrowLink( rectangle2,diamond);
+            const link5 = new myLibrary.ArrowLink( diamond,rectangle3);
+            const arrowLink =  new myLibrary.ArrowLink(diamond,circle);
+            
+            diagram.addLink(link4)
+            diagram.addLink(link3)
+            diagram.addLink(link5)
+            diagram.addLink(arrowLink)
 
             // Adicionando o DiagramElement ao diagrama
             diagram.addElement(rectangle);
             diagram.addElement(circle);
             diagram.addElement(diamond);
-            diagram.addElement(rectangle2)
+            diagram.addElement(rectangle2);
+            diagram.addElement(rectangle3)
 
-            diagram.addLink(link);
-            diagram.addLink(link2);
 
             container.diagram = diagram;
         }

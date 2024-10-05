@@ -32,7 +32,9 @@ export class Rectangle extends DiagramElement {
     this.svgElement.setAttribute('y', `${this.y}`);
   }
 
-  getRectangleIntersection(targetX: number, targetY: number) {
+  /*
+
+  getIntersection(targetX: number, targetY: number) {
     const centerX = this.x + this.width / 2;
     const centerY = this.y + this.height / 2;
 
@@ -47,18 +49,74 @@ export class Rectangle extends DiagramElement {
     if (absDx > absDy) {
       // Intersects with left or right edge
       intersectX = dx > 0 ? this.x + this.width : this.x;
-      intersectY = centerY + dy * (this.width / 2) / absDx;
+      // Proporção da altura para o movimento vertical
+      intersectY = centerY + (dy / absDx) * (this.height / 2);
     } else {
       // Intersects with top or bottom edge
       intersectY = dy > 0 ? this.y + this.height : this.y;
-      intersectX = centerX + dx * (this.height / 2) / absDy;
+      // Proporção da largura para o movimento horizontal
+      intersectX = centerX + (dx / absDy) * (this.width / 2);
     }
 
-    // Clamp the intersection point to the edges of the rectangle
+    // Limitar o ponto de interseção aos limites do retângulo
     intersectX = Math.min(Math.max(intersectX, this.x), this.x + this.width);
     intersectY = Math.min(Math.max(intersectY, this.y), this.y + this.height);
 
     return { x: intersectX, y: intersectY };
   }
-  
+ */
+
+  getIntersection(target: DiagramElement) {
+    // Coordenadas do centro do "source" (retângulo)
+    const sourceCenter = this.getCenterCoordinates()
+    const sourceCenterX = sourceCenter.x
+    const sourceCenterY = sourceCenter.y
+
+    // Coordenadas do centro do "target" (pode ser um círculo ou outro retângulo)
+    const targetCenter = target.getCenterCoordinates()
+    const targetCenterX = targetCenter.x
+    const targetCenterY = targetCenter.y
+
+    // Vetores de direção (delta)
+    const dx = targetCenterX - sourceCenterX;
+    const dy = targetCenterY - sourceCenterY;
+
+    // Calcular a inclinação (slope) e a inclinação absoluta
+    const slope = dy / dx;
+    const absSlope = Math.abs(slope);
+
+    let intersectX, intersectY;
+
+    // Se a inclinação é maior, então intersecciona no topo ou embaixo
+    if (absSlope > (this.height / this.width)) {
+      // Interseção com borda superior ou inferior
+      if (dy > 0) {
+        intersectY = this.y + this.height; // parte inferior
+      } else {
+        intersectY = this.y; // parte superior
+      }
+      // Calcula a coordenada X de interseção com base na inclinação
+      intersectX = sourceCenterX + (intersectY - sourceCenterY) / slope;
+
+      // Garantir que o ponto de interseção está dentro da largura do retângulo
+      intersectX = Math.max(this.x, Math.min(intersectX, this.x + this.width));
+
+    } else {
+      // Interseção com borda esquerda ou direita
+      if (dx > 0) {
+        intersectX = this.x + this.width; // lado direito
+      } else {
+        intersectX = this.x; // lado esquerdo
+      }
+      // Calcula a coordenada Y de interseção com base na inclinação
+      intersectY = sourceCenterY + slope * (intersectX - sourceCenterX);
+
+      // Garantir que o ponto de interseção está dentro da altura do retângulo
+      intersectY = Math.max(this.y, Math.min(intersectY, this.y + this.height));
+    }
+
+    return { x: intersectX, y: intersectY };
+  }
+
+
 }

@@ -180,5 +180,14 @@ export abstract class DiagramElement {
     };
   }
 
-  
+  /*
+  getIntersection(targetX: number, targetY: number) {
+    return this.getCenterCoordinates();
+  }*/
+
+    getIntersection(target: DiagramElement) {
+      return this.getCenterCoordinates();
+    }
+
+
 }

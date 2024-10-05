@@ -2,8 +2,9 @@ export * from './elements/DiagramElement';
 export * from './elements/Rectangle';
 export * from './elements/Circle'; 
 export * from './elements/Diamond'
-export * from './elements/UMLElement'
+export * from './elements/Decision'
 export * from './util/UUID'
 export * from './links/LinkBase'
-export * from './links/BezierLink'
+//export * from './links/BezierLink'
+export * from './links/ArrowLink'
 export * from './Diagram';

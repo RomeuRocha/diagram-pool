@@ -6,7 +6,7 @@ export class Circle extends DiagramElement {
   borderColor: string;
 
   constructor(x: number, y: number, radius: number, fillColor: string, borderColor: string) {
-    let largura = radius * 2
+    let largura = radius * 2;
 
     super(x, y, largura, largura, 'circle');
     this.radius = radius;
@@ -38,19 +38,27 @@ export class Circle extends DiagramElement {
     };
   }
 
-  getCircleIntersection( targetX: number, targetY: number) {
+  // Ajustado para receber o target como parâmetro
+  getIntersection(target: DiagramElement) {
     const cx = this.x;
     const cy = this.y;
     const radius = this.radius;
-  
-    const dx = targetX - cx;
-    const dy = targetY - cy;
+
+    // Coordenadas do centro do "target" (pode ser um círculo ou outro retângulo)
+    const targetCenter = target.getCenterCoordinates()
+    const targetCenterX = targetCenter.x
+    const targetCenterY = targetCenter.y
+
+    const dx = targetCenterX - cx;
+    const dy = targetCenterY - cy;
     const distance = Math.sqrt(dx * dx + dy * dy);
-  
+
+    // Calcula o ponto de interseção no círculo
     const x = cx + (dx / distance) * radius;
     const y = cy + (dy / distance) * radius;
-  
+
     return { x, y };
   }
+
   
 }
